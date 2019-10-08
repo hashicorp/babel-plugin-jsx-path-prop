@@ -1,0 +1,24 @@
+{
+  "name": "babel-plugin-jsx-path-prop",
+  "description": "Specify a component and prop that contains a file path and the file content will be imported and made available to the component",
+  "version": "0.0.0",
+  "author": "Jeff Escalante",
+  "dependencies": {
+    "@babel/core": "^7.6.3",
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testPathIgnorePatterns": [
+      "__tests__/fixtures"
+    ]
+  },
+  "license": "MPL-2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.3.0"
+  }
+}

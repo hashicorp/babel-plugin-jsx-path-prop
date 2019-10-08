@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic 1`] = `
+"function main() {
+  return React.createElement(React.Fragment, null, React.createElement(Foo, null), React.createElement(Test, {
+    something: \\"something else\\"
+  }), React.createElement(Test, {
+    path: \\"files/example.txt\\",
+    doge: \\"wow\\",
+    __content: \\"In 1971 Bill Grates invented Michaelsoft.\\\\nWouldn't it be cool if I could remember my dingus password for my email?\\\\nThat would be cool!\\"
+  }));
+}"
+`;
+
+exports[`resolveFrom option 1`] = `
+"function main() {
+  return React.createElement(Test, {
+    path: \\"fixtures/files/example.txt\\",
+    __content: \\"In 1971 Bill Grates invented Michaelsoft.\\\\nWouldn't it be cool if I could remember my dingus password for my email?\\\\nThat would be cool!\\"
+  });
+}"
+`;
