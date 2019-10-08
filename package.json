@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-jsx-path-prop",
   "description": "Specify a component and prop that contains a file path and the file content will be imported and made available to the component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Jeff Escalante",
   "devDependencies": {
     "@babel/core": "^7.6.3",
