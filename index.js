@@ -14,7 +14,9 @@ module.exports = function importGlobArrayPlugin(babel) {
 
         // filter for prop name matches
         const props = _path.node.openingElement.attributes
-        const matchedProp = props.find(prop => prop.name.name === propName)
+        const matchedProp = props.find(
+          prop => prop.name && prop.name.name === propName
+        )
         if (!matchedProp) return
 
         // use the prop value to read the file contents
