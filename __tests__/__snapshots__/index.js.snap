@@ -3,7 +3,8 @@
 exports[`basic 1`] = `
 "function main() {
   return React.createElement(React.Fragment, null, React.createElement(Foo, null), React.createElement(Test, {
-    something: \\"something else\\"
+    something: \\"something else\\",
+    jsxProp: 'wow'
   }), React.createElement(Test, {
     path: \\"files/example.txt\\",
     doge: \\"wow\\",
