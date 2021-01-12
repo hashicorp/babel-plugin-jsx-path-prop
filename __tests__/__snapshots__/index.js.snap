@@ -21,3 +21,14 @@ exports[`resolveFrom option 1`] = `
   });
 }"
 `;
+
+exports[`target 1`] = `
+"function main() {
+  return React.createElement(React.Fragment, null, React.createElement(Test, {
+    path: \\"files/example.txt\\",
+    doge: \\"wow\\",
+    target: \\"example\\",
+    example: \\"In 1971 Bill Grates invented Michaelsoft.\\\\nWouldn't it be cool if I could remember my dingus password for my email?\\\\nThat would be cool!\\"
+  }));
+}"
+`;

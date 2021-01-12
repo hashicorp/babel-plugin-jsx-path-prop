@@ -6,7 +6,7 @@ module.exports = function importGlobArrayPlugin(babel) {
   return {
     visitor: {
       JSXElement(_path, state) {
-        const { componentName, propName, resolveFrom } = state.opts
+        const { componentName, propName, resolveFrom, targetPropName } = state.opts
 
         // filter for jsx element name matches
         const elementName = _path.node.openingElement.name.name
@@ -18,6 +18,19 @@ module.exports = function importGlobArrayPlugin(babel) {
           prop => prop.name && prop.name.name === propName
         )
         if (!matchedProp) return
+
+        let targetPropValue = '__content';
+        if (targetPropName) {
+          const matchedTargetProp = props.find(
+            prop => prop.name && prop.name.name === targetPropName
+          );
+          if (!matchedTargetProp) {
+            throw new Error(
+              `The component "${componentName}" specified a target path prop of "${targetPropName}", but no prop was found\n\nComponent Location: ${state.file.opts.filename}:${_path.node.loc.start.line}:${_path.node.loc.start.column}`
+            )
+          }
+          targetPropValue = matchedTargetProp.value.value;
+        }
 
         // use the prop value to read the file contents
         const propFilePath = matchedProp.value.value
@@ -34,9 +47,9 @@ module.exports = function importGlobArrayPlugin(babel) {
           )
         }
 
-        // build the __content prop and add to the jsx element's props
+        // build the target value prop and add to the jsx element's props
         const contentProp = t.JSXAttribute(
-          t.JSXIdentifier('__content'),
+          t.JSXIdentifier(targetPropValue),
           t.stringLiteral(content)
         )
 
