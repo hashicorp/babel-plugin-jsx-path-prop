@@ -65,6 +65,18 @@ test('missing target error', () => {
   )
 })
 
+test('multi', () => {
+  const { content, filename } = loadFixture('multi');
+  expect(() =>
+    babel.transform(content, {
+      plugins: [react, [plugin, [
+        { componentName: 'Test', propName: 'path1', targetPropName: 'target1' },
+        { componentName: 'Test', propName: 'path2', targetPropName: 'target2' }
+      ]]]
+    })
+  )
+})
+
 function loadFixture(name) {
   const filename = path.join(__dirname, `fixtures/${name}.js`)
   return { content: fs.readFileSync(filename, 'utf8'), filename }
