@@ -40,7 +40,40 @@ test('invalid path error', () => {
       filename
     })
   ).toThrow(
-    `The component "Test" specified a path prop of "jdfhskdjhf", but no file was found at "/Users/jeff/Sites/babel-plugin-jsx-path-prop/__tests__/fixtures/jdfhskdjhf"\n\nComponent Location: /Users/jeff/Sites/babel-plugin-jsx-path-prop/__tests__/fixtures/invalid-path.js:4:6`
+    /The component "Test" specified a path prop of "jdfhskdjhf", but no file was found at "(\/.*\/)__tests__\/fixtures\/jdfhskdjhf"\n\nComponent Location: (\/.*\/)__tests__\/fixtures\/invalid-path.js:4:6/
+  )
+})
+
+test('target', () => {
+  const { content, filename } = loadFixture('target')
+  const { code } = babel.transform(content, {
+    plugins: [react, [plugin, { componentName: 'Test', propName: 'path', targetPropName: 'target' }]],
+    filename
+  })
+  expect(code).toMatchSnapshot()
+})
+
+test('missing target error', () => {
+  const { content, filename } = loadFixture('missing-target')
+  expect(() =>
+    babel.transform(content, {
+      plugins: [react, [plugin, { componentName: 'Test', propName: 'path', targetPropName: 'target' }]],
+      filename
+    })
+  ).toThrow(
+    /The component "Test" specified a target path prop of "target", but no prop was found\n\nComponent Location: (\/.*\/)__tests__\/fixtures\/missing-target.js:4:6/
+  )
+})
+
+test('multi', () => {
+  const { content, filename } = loadFixture('multi');
+  expect(() =>
+    babel.transform(content, {
+      plugins: [react, [plugin, [
+        { componentName: 'Test', propName: 'path1', targetPropName: 'target1' },
+        { componentName: 'Test', propName: 'path2', targetPropName: 'target2' }
+      ]]]
+    })
   )
 })
 
